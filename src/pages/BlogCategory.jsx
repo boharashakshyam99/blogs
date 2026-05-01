@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 const BlogCategory = () => {
   const [category, setCategory] = useState([]);
   const token = localStorage.getItem("token");
+
   const nav = useNavigate();
   const deleteCategory = async (id) => {
     try {

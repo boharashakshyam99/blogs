@@ -78,9 +78,9 @@ const AddCategory = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600 px-4">
-      <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-6">
+    <div className="min-h-screen  flex items-center justify-center px-4">
+      <div className="w-full max-w-lg   p-8 rounded-2xl shadow-2xl border border-green-600">
+        <h2 className="text-3xl font-bold text-center mb-6 text-green-400">
           {id ? "Edit Category" : "Add Category"}
         </h2>
 
@@ -145,7 +145,7 @@ const AddCategory = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg transition duration-300"
+            className="w-full bg-green-600 hover:bg-green-700 transition-all duration-200 text-white p-3 rounded-lg font-semibold shadow-md"
           >
             {isSubmitting
               ? "Submitting..."

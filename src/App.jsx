@@ -15,6 +15,7 @@ import Footer from "./component/Footer";
 import Contact from "./pages/Contact";
 import AboutPage from "./pages/AboutPage";
 import Profile from "./pages/Profile";
+import InBlog from "./pages/InBlog";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/addBlog/:id" element={<BlogForm />} />
         <Route path="/addCat/:id" element={<AddCategory />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/blog/:id" element={<InBlog />} />
       </Route>
 
       <Route path="/cate" element={<BlogCategory />} />

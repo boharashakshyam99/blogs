@@ -3,7 +3,7 @@ import axios from "axios";
 import Footer from "../component/Footer";
 import Navbar from "../component/Navbar";
 import BlogCategory from "./BlogCategory";
-
+import { NavLink } from "react-router-dom";
 const Home = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [category, setCategory] = useState([]);
@@ -13,12 +13,6 @@ const Home = () => {
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
-  };
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    console.log("Subscribed with email:", email);
-    setEmail("");
   };
 
   return (
@@ -76,12 +70,8 @@ const Home = () => {
             />
           </div>
         </section>
-
-        {/* CATEGORY COMPONENT */}
         <BlogCategory />
-
-        {/* FEATURE ARTICLE */}
-        <article className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-12 p-6 rounded-lg hover:bg-[#f1f4f6] transition">
+        {/* <article className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-12 p-6 rounded-lg hover:bg-[#f1f4f6] transition">
           <div>
             <h3 className="text-3xl font-serif mb-4">The 2024 Collection</h3>
 
@@ -100,10 +90,9 @@ const Home = () => {
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPx8iCtG9rudYWwi0rSZVcI2iwSEHWJ1sXcAYOutJcxmU2rZRA7TzVz1zUuT0WgVgCwWViD1LW8eU9DNnpV9D_ZrFk_7L-NzANC5rxAC20S3ZsKi12dmhCSj4hhxPwPdJrfiGsxJR2MKIdv9sP62mlJ9TX-tCzBhNATUSKF24o8UM0G6dj3BTXuv4YOPysJ6mPMz94xONh1pfXmvoZs8mxhhaz7oHi57zsj0sS167xF4qTwsOWWIWY2zF7laswchB2dUMB5SymCAQ"
             alt="collection"
           />
-        </article>
+        </article> */}
       </main>
 
-      {/* FOOTER */}
       <Footer />
     </div>
   );

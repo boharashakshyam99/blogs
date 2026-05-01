@@ -6,8 +6,9 @@ const Dashboard = () => {
   const nav = useNavigate();
   async function logout() {
     try {
-      const res = await axios.post("  http://localhost:5000/api/auth/logout");
+      await axios.post("  http://localhost:5000/api/auth/logout");
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
       nav("/login");
     } catch (error) {
       console.log(error);

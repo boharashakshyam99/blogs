@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -11,6 +11,7 @@ const BlogForm = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
+  const [category, setCategory] = useState([]);
   const nav = useNavigate();
   const token = localStorage.getItem("token");
   const { id } = useParams();
@@ -27,8 +28,22 @@ const BlogForm = () => {
       console.log(error);
     }
   }
+  async function categoryData() {
+    try {
+      const res = await axios.get("http://localhost:5000/api/category", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCategory(res.data.category);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
       const formData = new FormData();
 
@@ -36,6 +51,7 @@ const BlogForm = () => {
       formData.append("description", data.description);
       formData.append("author", data.author);
       formData.append("image", data.image[0]);
+      formData.append("category", data.category);
 
       if (id) {
         await axios.put(`http://localhost:5000/api/blog/${id}`, formData, {
@@ -58,6 +74,7 @@ const BlogForm = () => {
 
   useEffect(() => {
     if (id) existingBlog(id);
+    categoryData();
   }, [id]);
 
   return (
@@ -76,11 +93,12 @@ const BlogForm = () => {
           {/* Title */}
           <div>
             <label className="text-sm -300">Title</label>
+
             <input
               type="text"
               placeholder="Enter title"
               {...register("title", { required: "Title is required" })}
-              className="w-full mt-1 p-3 rounded-lg bg-black border border-gray-700 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none"
+              className="w-full mt-1 p-3 rounded-lg  border border-gray-700 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none"
             />
             {errors.title && (
               <p className="text-red-400 text-sm mt-1">
@@ -97,7 +115,7 @@ const BlogForm = () => {
               {...register("description", {
                 required: "Content is required",
               })}
-              className="w-full mt-1 p-3 h-28 rounded-lg bg-black border border-gray-700 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none resize-none"
+              className="w-full mt-1 p-3 h-28 rounded-lg  border border-gray-700 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none resize-none"
             />
             {errors.description && (
               <p className="text-red-400 text-sm mt-1">
@@ -112,7 +130,7 @@ const BlogForm = () => {
             <input
               type="file"
               {...register("image", { required: "Image is required" })}
-              className="w-full mt-1 p-2 text-gray-300 file:bg-green-600 file:text-white file:border-0 file:px-4 file:py-2 file:rounded-lg file:cursor-pointer bg-black border border-gray-700 rounded-lg"
+              className="w-full mt-1 p-2  file:bg-green-600 file:text-white file:border-0 file:px-4 file:py-2 file:rounded-lg file:cursor-pointer  border border-gray-700 rounded-lg"
             />
             {errors.image && (
               <p className="text-red-400 text-sm mt-1">
@@ -128,7 +146,7 @@ const BlogForm = () => {
               type="text"
               placeholder="Author name"
               {...register("author", { required: "Author is required" })}
-              className="w-full mt-1 p-3 rounded-lg bg-black border border-gray-700 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none"
+              className="w-full mt-1 p-3 rounded-lg  border border-gray-700 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none"
             />
             {errors.author && (
               <p className="text-red-400 text-sm mt-1">
@@ -136,7 +154,15 @@ const BlogForm = () => {
               </p>
             )}
           </div>
+          <select {...register("category")}>
+            <option value="">Select Category</option>
 
+            {category.map((item, index) => (
+              <option key={index} value={item.title}>
+                {item.title}
+              </option>
+            ))}
+          </select>
           {/* Button */}
           <button
             type="submit"
