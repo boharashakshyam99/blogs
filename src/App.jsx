@@ -16,6 +16,8 @@ import Contact from "./pages/Contact";
 import AboutPage from "./pages/AboutPage";
 import Profile from "./pages/Profile";
 import InBlog from "./pages/InBlog";
+import EmailVerify from "./pages/EmailVerify";
+import ForgotPassword from "./pages/EmailVerify";
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
       <Route path="/nav" element={<Navbar />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/forgotPass" element={<ForgotPassword />} />
       <Route
         element={
           <ProtectedRoutes>
